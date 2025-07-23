@@ -2,28 +2,26 @@ from datetime import datetime
 import calendar
 from reportlab.lib.pagesizes import A6
 from reportlab.lib import colors
+from reportlab.lib.units import mm
 
 
-def draw(c):
-    """Draw a simple month calendar on the given canvas."""
+def draw(c, top_y, bottom_y, margin=6 * mm):
+    """Draw a simple month grid inside the given header bounds."""
     today = datetime.today()
     year = today.year
     month = today.month
     day = today.day
 
-    width, height = A6
-
-    cell_size = 20
-    start_x = 20
-    start_y = height - 40
-    padding = 6
-
-    c.setFont("Courier", 10)
-
-    month_name = calendar.month_name[month]
-    c.drawString(start_x, start_y + 20, f"{month_name} {year}")
-
     month_matrix = calendar.monthcalendar(year, month)
+    rows = len(month_matrix)
+
+    cell_size = (top_y - bottom_y) / rows
+
+    start_x = margin
+    start_y = top_y - cell_size
+    padding = cell_size * 0.3
+
+    c.setFont("Courier", 8)
 
     for row_idx, week in enumerate(month_matrix):
         for col_idx, date in enumerate(week):
