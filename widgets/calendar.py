@@ -16,13 +16,15 @@ def draw(c, top_y, bottom_y, margin=6 * mm, bottom_pad=5 * mm):
     month = today.month
     day = today.day
 
+    width, _ = A6
+
     month_matrix = calendar.monthcalendar(year, month)
     rows = len(month_matrix)
 
     cell_size = (top_y - bottom_y - bottom_pad) / rows
 
     start_x = margin
-    start_y = top_y - cell_size
+    start_y = top_y - margin - cell_size
     padding = cell_size * 0.3
 
     c.setFont("Courier", 8)

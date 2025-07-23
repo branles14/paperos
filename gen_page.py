@@ -21,6 +21,7 @@ def create_page(output_path=DEFAULT_PATH):
 
     calendar.draw(c, header_top, header_bottom, margin=MARGIN,
                   bottom_pad=CALENDAR_BOTTOM_PAD)
+
     astro.draw(c, header_top - 12, margin=MARGIN)
 
     c.setLineWidth(1)
