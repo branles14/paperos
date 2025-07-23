@@ -1,16 +1,15 @@
 from datetime import datetime
 import calendar
-from reportlab.lib.pagesizes import A6
 from reportlab.lib import colors
 from reportlab.lib.units import mm
 
 
-def draw(c, top_y, bottom_y, margin=5 * mm):
+def draw(c, top_y, bottom_y, margin=6 * mm, bottom_pad=5 * mm):
     """Draw a simple month grid inside the given header bounds.
 
-    The ``margin`` parameter controls the padding inside the header on
-    all sides.  The calendar grid starts ``margin`` units from the
-    header's edges and fits within the remaining space.
+    ``margin`` is the left margin used to align the grid with the rest of
+    the page. ``bottom_pad`` adds a gap below the grid while allowing the
+    top row to sit flush with ``top_y``.
     """
     today = datetime.today()
     year = today.year
@@ -22,10 +21,7 @@ def draw(c, top_y, bottom_y, margin=5 * mm):
     month_matrix = calendar.monthcalendar(year, month)
     rows = len(month_matrix)
 
-    available_height = top_y - bottom_y - 2 * margin
-    available_width = width - 2 * margin
-
-    cell_size = min(available_height / rows, available_width / 7)
+    cell_size = (top_y - bottom_y - bottom_pad) / rows
 
     start_x = margin
     start_y = top_y - margin - cell_size
