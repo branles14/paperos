@@ -5,20 +5,30 @@ from reportlab.lib import colors
 from reportlab.lib.units import mm
 
 
-def draw(c, top_y, bottom_y, margin=6 * mm):
-    """Draw a simple month grid inside the given header bounds."""
+def draw(c, top_y, bottom_y, margin=5 * mm):
+    """Draw a simple month grid inside the given header bounds.
+
+    The ``margin`` parameter controls the padding inside the header on
+    all sides.  The calendar grid starts ``margin`` units from the
+    header's edges and fits within the remaining space.
+    """
     today = datetime.today()
     year = today.year
     month = today.month
     day = today.day
 
+    width, _ = A6
+
     month_matrix = calendar.monthcalendar(year, month)
     rows = len(month_matrix)
 
-    cell_size = (top_y - bottom_y) / rows
+    available_height = top_y - bottom_y - 2 * margin
+    available_width = width - 2 * margin
+
+    cell_size = min(available_height / rows, available_width / 7)
 
     start_x = margin
-    start_y = top_y - cell_size
+    start_y = top_y - margin - cell_size
     padding = cell_size * 0.3
 
     c.setFont("Courier", 8)
