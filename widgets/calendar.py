@@ -2,6 +2,7 @@ from datetime import datetime
 import calendar
 from reportlab.lib import colors
 from reportlab.lib.units import mm
+from reportlab.lib.pagesizes import A6
 
 
 def draw(c, top_y, bottom_y, margin=6 * mm, bottom_pad=5 * mm):
