@@ -8,6 +8,7 @@ DEFAULT_PATH = "page.pdf"
 
 HEADER_HEIGHT = 30 * mm
 MARGIN = 6 * mm
+CALENDAR_MARGIN = 5 * mm
 
 
 def create_page(output_path=DEFAULT_PATH):
@@ -18,7 +19,7 @@ def create_page(output_path=DEFAULT_PATH):
     header_top = height - MARGIN
     header_bottom = header_top - HEADER_HEIGHT
 
-    calendar.draw(c, header_top, header_bottom, margin=MARGIN)
+    calendar.draw(c, header_top, header_bottom, margin=CALENDAR_MARGIN)
     astro.draw(c, header_top - 12, margin=MARGIN)
 
     c.setLineWidth(1)
