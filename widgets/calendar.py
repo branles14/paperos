@@ -28,6 +28,14 @@ def draw(c, top_y, bottom_y, margin=6 * mm, bottom_pad=5 * mm):
     start_y = top_y - margin - cell_size
     padding = cell_size * 0.3
 
+    grid_width = cell_size * 7
+    grid_height = cell_size * rows
+    grid_bottom = start_y - (rows - 1) * cell_size
+
+    c.setFillColor(colors.blue)
+    c.rect(start_x, grid_bottom, grid_width, grid_height, fill=1, stroke=0)
+    c.setFillColor(colors.black)
+
     c.setFont("Courier", 8)
 
     for row_idx, week in enumerate(month_matrix):
@@ -49,4 +57,3 @@ def draw(c, top_y, bottom_y, margin=6 * mm, bottom_pad=5 * mm):
             c.drawCentredString(x + cell_size / 2, y + padding, f"{date:2}")
 
     c.setFillColor(colors.black)
-

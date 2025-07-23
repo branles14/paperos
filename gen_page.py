@@ -1,6 +1,7 @@
 from reportlab.lib.pagesizes import A6
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import mm
+from reportlab.lib import colors
 
 from widgets import calendar, astro
 
@@ -19,8 +20,16 @@ def create_page(output_path=DEFAULT_PATH):
     header_top = height - MARGIN
     header_bottom = header_top - HEADER_HEIGHT
 
-    calendar.draw(c, header_top, header_bottom, margin=MARGIN,
-                  bottom_pad=CALENDAR_BOTTOM_PAD)
+    c.setFillColor(colors.lightblue)
+    c.rect(MARGIN, header_bottom, width - 2 * MARGIN, HEADER_HEIGHT, stroke=0, fill=1)
+
+    calendar.draw(
+        c,
+        header_top,
+        header_bottom,
+        margin=MARGIN,
+        bottom_pad=CALENDAR_BOTTOM_PAD,
+    )
 
     astro.draw(c, header_top - 12, margin=MARGIN)
 
@@ -33,4 +42,3 @@ def create_page(output_path=DEFAULT_PATH):
 
 if __name__ == "__main__":
     create_page()
-
